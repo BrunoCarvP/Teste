@@ -1,4 +1,9 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using UdemyTeste.Data;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<UdemyTesteContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("UdemyTesteContext") ?? throw new InvalidOperationException("Connection string 'UdemyTesteContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
